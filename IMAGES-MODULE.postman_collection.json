@@ -1,0 +1,94 @@
+{
+	"info": {
+		"_postman_id": "c5189d79-1737-46a5-8e69-9c3d21e004e4",
+		"name": "IMAGES-MODULE",
+		"description": "## This collection consists of all images related REST APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "JPEG-API",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://httpbin.org/image/jpeg",
+					"protocol": "https",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"image",
+						"jpeg"
+					]
+				},
+				"description": "This is a RESTful API that returns JPEG response from the server"
+			},
+			"response": []
+		},
+		{
+			"name": "PNG-API",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://httpbin.org/image/png",
+					"protocol": "https",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"image",
+						"png"
+					]
+				},
+				"description": "This is a RESTful API that returns PNG response from the server"
+			},
+			"response": []
+		},
+		{
+			"name": "SVG-API",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://httpbin.org/image/svg",
+					"protocol": "https",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"image",
+						"svg"
+					]
+				},
+				"description": "This is a RESTful API that returns SVG response from the server"
+			},
+			"response": []
+		},
+		{
+			"name": "WEBP-API",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://httpbin.org/image/webp",
+					"protocol": "https",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"image",
+						"webp"
+					]
+				},
+				"description": "This is a RESTful API that returns JPEG response from the server"
+			},
+			"response": []
+		}
+	]
+}

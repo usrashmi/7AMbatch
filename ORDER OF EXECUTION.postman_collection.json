@@ -1,0 +1,175 @@
+{
+	"info": {
+		"_postman_id": "061f64ab-37be-4ab7-a5f2-980a2a882b6a",
+		"name": "ORDER OF EXECUTION",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "HTML-API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code==200) {\r",
+							"    postman.setNextRequest(\"JSON-API\");\r",
+							"}\r",
+							"else {\r",
+							"    postman.setNextRequest(\"\");\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://httpbin.org/html",
+					"protocol": "https",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"html"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "XML-API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code==200) {\r",
+							"    postman.setNextRequest(\"\");\r",
+							"}\r",
+							"else {\r",
+							"    postman.setNextRequest(\"XML-API\");\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://httpbin.org/xml",
+					"protocol": "https",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"xml"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "JSON-API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code==200) {\r",
+							"    postman.setNextRequest(\"TEXT-API\");\r",
+							"}\r",
+							"else {\r",
+							"    postman.setNextRequest(\"\");\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://httpbin.org/json",
+					"protocol": "https",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TEXT-API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code==200) {\r",
+							"    postman.setNextRequest(\"XML-API\");\r",
+							"}\r",
+							"else {\r",
+							"    postman.setNextRequest(\"\");\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://httpbin.org/robots.txt",
+					"protocol": "https",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"robots.txt"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Verify if the response doesn't contains 4xx & 5xx errors\", function () {",
+					"    pm.response.to.not.be.error;",
+					"});",
+					"",
+					"pm.test(\"Verify if the response contains 2xx success code\", function () {",
+					"    pm.response.to.be.success;",
+					"});"
+				]
+			}
+		}
+	]
+}

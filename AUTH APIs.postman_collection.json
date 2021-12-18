@@ -1,0 +1,828 @@
+{
+	"info": {
+		"_postman_id": "fc3c61ec-ed6b-4803-aee8-35e7bc035c8e",
+		"name": "AUTH APIs",
+		"description": "This collection consists of **RESTful APIs** that uses below authorization techniques to get server response:\n\n1.  **Basic Authorization**\n2.  **Digest Authorization**\n3.  **Bearer Token Authorization**",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POSITIVE TC",
+			"item": [
+				{
+					"name": "BASIC AUTH",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify the response body content\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"user\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "passwd",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://httpbin.org/basic-auth/user/passwd",
+							"protocol": "https",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"basic-auth",
+								"user",
+								"passwd"
+							]
+						},
+						"description": "This is a RESTful API that uses Basic Authorization to get server response"
+					},
+					"response": []
+				},
+				{
+					"name": "BEARER TOKEN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify if token is present in response body\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"token\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer 12345",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://httpbin.org/bearer",
+							"protocol": "https",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"bearer"
+							]
+						},
+						"description": "This is a RESTful API that uses **Bearer Token Authorization** to get server response"
+					},
+					"response": []
+				},
+				{
+					"name": "DIGEST AUTH",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify the response body content\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"user\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "digest",
+							"digest": [
+								{
+									"key": "qop",
+									"value": "auth",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "passwd",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "MD5",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://httpbin.org/digest-auth/auth/user/passwd",
+							"protocol": "https",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"digest-auth",
+								"auth",
+								"user",
+								"passwd"
+							]
+						},
+						"description": "This is a RESTful API that uses Digest Authorization to get server response"
+					},
+					"response": []
+				},
+				{
+					"name": "DIGEST AUTH-ALGORITHM",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Verify the response body content\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"user\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "digest",
+							"digest": [
+								{
+									"key": "qop",
+									"value": "auth-int",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "MD5",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "passwd",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://httpbin.org/digest-auth/auth-int/user/passwd/MD5",
+							"protocol": "https",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"digest-auth",
+								"auth-int",
+								"user",
+								"passwd",
+								"MD5"
+							]
+						},
+						"description": "This is a RESTful API that uses Digest Authorization to get server response"
+					},
+					"response": []
+				}
+			],
+			"description": "This folder consists of all positive test scenarios to test the secured **REST APIs.**",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Verify is 200 is the response code\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Verify if response is received\", function () {",
+							"    pm.response.to.have.body",
+							"});",
+							"",
+							"pm.test(\"Verify if response body is correct\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"authenticated\");",
+							"    pm.expect(pm.response.text()).to.include(\"true\");",
+							"});"
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "NEGATIVE TC",
+			"item": [
+				{
+					"name": "BASIC AUTH-NO AUTH",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://httpbin.org/basic-auth/user/passwd",
+							"protocol": "https",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"basic-auth",
+								"user",
+								"passwd"
+							]
+						},
+						"description": "This is a RESTful API that uses No Auth to get server response"
+					},
+					"response": []
+				},
+				{
+					"name": "DIGEST AUTH-NO AUTH",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://httpbin.org/digest-auth/auth/user/passwd",
+							"protocol": "https",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"digest-auth",
+								"auth",
+								"user",
+								"passwd"
+							]
+						},
+						"description": "This is a RESTful API that uses No Auth to get server response"
+					},
+					"response": []
+				},
+				{
+					"name": "BEARER TOKEN-NO AUTH",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://httpbin.org/bearer",
+							"protocol": "https",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"bearer"
+							]
+						},
+						"description": "This is a RESTful API that uses No Auth to get server response"
+					},
+					"response": []
+				},
+				{
+					"name": "BASIC AUTH-INVALID AUTH",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer 12345",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://httpbin.org/basic-auth/user/passwd",
+							"protocol": "https",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"basic-auth",
+								"user",
+								"passwd"
+							]
+						},
+						"description": "This is a RESTful API that uses Invalid Auth to get server response"
+					},
+					"response": []
+				},
+				{
+					"name": "BEARER TOKEN-INVALID AUTH",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "passwd",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://httpbin.org/bearer",
+							"protocol": "https",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"bearer"
+							]
+						},
+						"description": "This is a RESTful API that uses Invalid Auth to get server response"
+					},
+					"response": []
+				},
+				{
+					"name": "DIGEST AUTH-INVALID AUTH",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer 12345",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://httpbin.org/digest-auth/auth/user/passwd",
+							"protocol": "https",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"digest-auth",
+								"auth",
+								"user",
+								"passwd"
+							]
+						},
+						"description": "This is a RESTful API that uses Invalid Auth to get server response"
+					},
+					"response": []
+				},
+				{
+					"name": "BASIC AUTH-EMPTY CREDENTIALS",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://httpbin.org/basic-auth/user/passwd",
+							"protocol": "https",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"basic-auth",
+								"user",
+								"passwd"
+							]
+						},
+						"description": "This is a RESTful API that uses empty credentials to get server response"
+					},
+					"response": []
+				},
+				{
+					"name": "BEARER TOKEN-EMPTY CREDENTIALS",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://httpbin.org/bearer",
+							"protocol": "https",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"bearer"
+							]
+						},
+						"description": "This is a RESTful API that uses empty credentials to get server response"
+					},
+					"response": []
+				},
+				{
+					"name": "DIGEST AUTH-EMPTY CREDENTIALS",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "digest",
+							"digest": [
+								{
+									"key": "qop",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "MD5",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://httpbin.org/digest-auth/auth/user/passwd",
+							"protocol": "https",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"digest-auth",
+								"auth",
+								"user",
+								"passwd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BASIC AUTH-INVALID CREDENTIALS",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "venkatesh",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "rashmi",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://httpbin.org/basic-auth/user/passwd",
+							"protocol": "https",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"basic-auth",
+								"user",
+								"passwd"
+							]
+						},
+						"description": "This is a RESTful API that uses invalid credentials to get server response"
+					},
+					"response": []
+				},
+				{
+					"name": "BEARER TOKEN-INVALID CREDENTIALS",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Kiran trainer 123",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://httpbin.org/bearer",
+							"protocol": "https",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"bearer"
+							]
+						},
+						"description": "This is a RESTful API that uses invalid credentials to get server response"
+					},
+					"response": []
+				},
+				{
+					"name": "DIGEST AUTH-INVALID CREDENTIALS",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "digest",
+							"digest": [
+								{
+									"key": "username",
+									"value": "mindmajix",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "passwd",
+									"type": "string"
+								},
+								{
+									"key": "qop",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "MD5",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://httpbin.org/digest-auth/auth/user/passwd",
+							"protocol": "https",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"digest-auth",
+								"auth",
+								"user",
+								"passwd"
+							]
+						},
+						"description": "This is a RESTful API that uses invalid credentials to get server response"
+					},
+					"response": []
+				}
+			],
+			"description": "This folder consists of all negative test scenarios"
+		}
+	]
+}
